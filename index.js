@@ -171,10 +171,12 @@ app.put('/book/', [
             }
 
         }).then(b => {
-            fs.unlink('public'+b.image, (err)=>{
-                if (err) throw err;
-                console.log('Successfully deleted');
-            })
+            if(fs.existsSync('public'+b.image)){
+                fs.unlink('public'+b.image, (err)=>{
+                    if (err) throw err;
+                    console.log('Successfully deleted');
+                })
+            }
             if (!b) {
                 throw new Error('ISBN not found');
             }
@@ -248,10 +250,12 @@ app.delete('/book/:isbn', [
                 isbn: value
             }
         }).then(b => {
-            fs.unlink('public'+b.image, (err)=>{
-                if (err) throw err;
-                console.log('Successfully deleted');
-            })
+            if(fs.existsSync('public'+b.image)){
+                fs.unlink('public'+b.image, (err)=>{
+                    if (err) throw err;
+                    console.log('Successfully deleted');
+                })
+            }
             if (!b) {
                 throw new Error('ISBN not found');
             }
